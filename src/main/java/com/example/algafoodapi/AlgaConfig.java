@@ -21,8 +21,8 @@ public class AlgaConfig {
         return notificador;
     }
 
-    @Bean
-    public AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
-        return new AtivacaoClienteService(notificador);
-    }
+//    @Bean
+//    public AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
+//        return new AtivacaoClienteService(notificador);
+//    }
 }
