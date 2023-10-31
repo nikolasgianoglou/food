@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 //@Configuration
 public class ServiceConfig {
-//    @Bean
+//    @Bean you can pass a initMethod and a destroyMethod to be called if you dont want to use anotations
 //    public AtivacaoClienteService ativacaoClienteService(Notificador notificador) {
 //        return new AtivacaoClienteService(notificador);
 //    }
