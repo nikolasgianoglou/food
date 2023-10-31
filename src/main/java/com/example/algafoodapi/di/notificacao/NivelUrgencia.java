@@ -1,5 +1,5 @@
 package com.example.algafoodapi.di.notificacao;
 
 public enum NivelUrgencia {
-    URGENTE, NORMAL;
+    URGENTE, SEM_URGENCIA;
 }
