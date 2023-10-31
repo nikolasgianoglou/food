@@ -2,6 +2,7 @@ package com.example.algafoodapi.di.notificacao;
 
 import com.example.algafoodapi.di.model.Client;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -23,9 +24,17 @@ public class NotificadorEmail implements Notificador {
 //    public NotificadorEmail(String hostServidorSmtp) {
 //        this.hostServidorSmtp = hostServidorSmtp;
 //    }
+    @Value("${notificador.email.host-servidor}")
+    private String host;
+    @Value("${notificador.email.porta-servidor}")
+    private Integer porta;
 
     @Override
     public void notificar(Client client, String msg) {
+
+        System.out.println("Host" + host);
+
+        System.out.println("Porta" + host);
 //        if (caixaAlta) {
 //            msg = msg.toUpperCase();
 //        }
