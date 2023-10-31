@@ -3,6 +3,7 @@ package com.example.algafoodapi.di.notificacao;
 import com.example.algafoodapi.di.model.Client;
 import org.springframework.stereotype.Component;
 
+@TipoDoNotificador(NivelUrgencia.URGENTE)
 @Component
 public class NotificadorSMS implements Notificador{
     @Override

@@ -10,7 +10,8 @@ e gerencie ela eu posso usar a anotacao @Component, essa é uma das formas
 * */
 
 //@Primary // notificador email é o meu bean principal, use ele para fazer a desambiguacao
-@Qualifier("email") //notacao para qualificar/identificar nosso componente, nela coloco uma identificacao
+//@Qualifier("email") //notacao para qualificar/identificar nosso componente, nela coloco uma identificacao
+@TipoDoNotificador(NivelUrgencia.NORMAL)
 @Component
 public class NotificadorEmail implements Notificador {
 

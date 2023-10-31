@@ -1,8 +1,10 @@
 package com.example.algafoodapi.di.service;
 
 import com.example.algafoodapi.di.model.Client;
+import com.example.algafoodapi.di.notificacao.NivelUrgencia;
 import com.example.algafoodapi.di.notificacao.Notificador;
 import com.example.algafoodapi.di.notificacao.NotificadorEmail;
+import com.example.algafoodapi.di.notificacao.TipoDoNotificador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,7 +16,8 @@ public class AtivacaoClienteService {
 
     // outro ponto de injecao pode ser a propria variavel
 //    @Autowired(required = false) // quando passo o parametro required ele torna essa variavel opcional
-    @Qualifier("email")
+//    @Qualifier("email")
+    @TipoDoNotificador(NivelUrgencia.URGENTE)
     @Autowired
     private Notificador notificador;
 
