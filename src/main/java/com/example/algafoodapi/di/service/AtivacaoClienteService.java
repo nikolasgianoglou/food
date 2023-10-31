@@ -4,13 +4,18 @@ import com.example.algafoodapi.di.model.Client;
 import com.example.algafoodapi.di.notificacao.Notificador;
 import com.example.algafoodapi.di.notificacao.NotificadorEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class AtivacaoClienteService {
 
     // outro ponto de injecao pode ser a propria variavel
-    @Autowired(required = false) // quando passo o parametro required ele torna essa variavel opcional
+//    @Autowired(required = false) // quando passo o parametro required ele torna essa variavel opcional
+    @Qualifier("email")
+    @Autowired
     private Notificador notificador;
 
     // uma das formas de se fazer injeção de dependencia é por meio do construtor
@@ -25,12 +30,7 @@ public class AtivacaoClienteService {
 
     public void ativar(Client client) {
         client.ativar();
-        if (notificador != null) {
-            notificador.notificar(client, "Seu cadastro no sistema está ativo!!");
-        } else {
-            System.out.println("Nao existe notificador mas o cliente foi ativado");
-        }
-
+        notificador.notificar(client, "Seu cadastro no sistema está ativo!!");
     }
 
     // outra forma de usar injecao de dependencia é por meio do set, nesse caso tem que usar a anotacao autowired
