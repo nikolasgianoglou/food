@@ -24,7 +24,7 @@ public class CadastroCozinha {
     }
 
     @Transactional // quando anoto um metodo com Transactional esse metodo sera executado dentro de uma transacao
-    public Cozinha adicionar(Cozinha cozinha) {
+    public Cozinha salvar(Cozinha cozinha) {
         return manager.merge(cozinha); //retorna a instancia persistida, nao altera o que foi passado como parametro
     }
 }
