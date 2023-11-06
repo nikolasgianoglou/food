@@ -19,6 +19,10 @@ public class CadastroCozinha {
         return query.getResultList();
     }
 
+    public Cozinha buscar(Long id) {
+        return manager.find(Cozinha.class, id);
+    }
+
     @Transactional // quando anoto um metodo com Transactional esse metodo sera executado dentro de uma transacao
     public Cozinha adicionar(Cozinha cozinha) {
         return manager.merge(cozinha); //retorna a instancia persistida, nao altera o que foi passado como parametro
