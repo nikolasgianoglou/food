@@ -1,19 +1,17 @@
 package com.example.algafoodapi.domain.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity // representa uma entidade
-@Table(name="tab_cozinhas")
+//@Table(name="tab_cozinhas")
 public class Cozinha {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // diz que quem gera a chave é o proprio provedor do banco de dados
     private Long id;
 
-    @Column(name = "nom_cozinha")
+//    @Column(name = "nom_cozinha", length = 80)
     private String nome;
 
     public void setId(Long id) {
