@@ -2,26 +2,20 @@ package com.example.algafoodapi.domain.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-//@Getter
-//@Setter
-//@EqualsAndHashCode
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity // representa uma entidade
-//@Table(name="tab_cozinhas")
-public class Cozinha {
+@Entity
+public class FormaPagamento {
 
     @EqualsAndHashCode.Include //crie um equals e hash code apenas usando o id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // diz que quem gera a chave é o proprio provedor do banco de dados
     private Long id;
-
-    @Column(length = 80, nullable = false)
-    private String nome;
+    private String descricao;
 }
