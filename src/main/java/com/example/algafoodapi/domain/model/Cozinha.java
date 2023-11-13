@@ -27,7 +27,7 @@ public class Cozinha {
     private Long id;
 
 //    @JsonIgnore
-    @JsonProperty(value = "titulo") // muda o nome da representação do seu modelo
+//    @JsonProperty(value = "titulo") // muda o nome da representação do seu modelo
     @Column(length = 80, nullable = false)
     private String nome;
 }
