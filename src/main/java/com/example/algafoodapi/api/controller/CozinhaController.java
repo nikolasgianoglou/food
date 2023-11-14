@@ -4,8 +4,10 @@ package com.example.algafoodapi.api.controller;
 import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.CozinhasXmlWrapper;
 import com.example.algafoodapi.domain.repository.CozinhaRepository;
+import com.example.algafoodapi.domain.service.CadastroCozinhaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +25,9 @@ public class CozinhaController {
 
     @Autowired
     private CozinhaRepository cozinhaRepository;
+
+    @Autowired
+    private CadastroCozinhaService cadastroCozinha;
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<Cozinha> listar() {
@@ -68,7 +73,7 @@ public class CozinhaController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-        return cozinhaRepository.salvar(cozinha);
+        return cadastroCozinha.salvar(cozinha);
     }
 
     @PutMapping(value = "/{id}")
@@ -84,5 +89,20 @@ public class CozinhaController {
         return ResponseEntity.notFound().build();
     }
 
-    
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Cozinha> remover(@PathVariable Long id) {
+
+        try {
+            Cozinha cozinha = cozinhaRepository.buscar(id);
+            if(cozinha!= null) {
+                cozinhaRepository.remover(cozinha);
+                return ResponseEntity.noContent().build();
+            }
+        }catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
