@@ -1,6 +1,8 @@
 package com.example.algafoodapi.api.controller;
 
 
+import com.example.algafoodapi.domain.exception.EntidadeEmUsoException;
+import com.example.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.CozinhasXmlWrapper;
 import com.example.algafoodapi.domain.repository.CozinhaRepository;
@@ -94,15 +96,15 @@ public class CozinhaController {
     public ResponseEntity<Cozinha> remover(@PathVariable Long id) {
 
         try {
-            Cozinha cozinha = cozinhaRepository.buscar(id);
-            if(cozinha!= null) {
-                cozinhaRepository.remover(cozinha);
-                return ResponseEntity.noContent().build();
-            }
-        }catch (DataIntegrityViolationException e) {
+            cadastroCozinha.excluir(id);
+            return ResponseEntity.noContent().build();
+//            return ResponseEntity.notFound().build();
+        }catch (EntidadeNaoEncontradaException e){
+            return ResponseEntity.notFound().build();
+        }
+        catch (EntidadeEmUsoException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-        return ResponseEntity.notFound().build();
     }
 
 }
