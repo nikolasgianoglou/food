@@ -4,6 +4,7 @@ import com.example.algafoodapi.domain.model.Cidade;
 import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.repository.CidadeRepository;
 import com.example.algafoodapi.domain.repository.CozinhaRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
@@ -36,8 +37,11 @@ public class CidadeRepositoryImp implements CidadeRepository {
 
     @Transactional
     @Override
-    public void remover(Cidade cidade) {
-        cidade = buscar(cidade.getId());
+    public void remover(Long id) {
+        Cidade cidade = buscar(id);
+        if(cidade == null) {
+            throw new EmptyResultDataAccessException(1);
+        }
         manager.remove(cidade);
     }
 }
