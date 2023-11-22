@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @ResponseBody // indica que as respostas desse controlador deve ir para a resposta da requisicao HTTP, posso usar a anotacao @RestController, que engloba a Controller e a ResponseBody
@@ -31,13 +32,14 @@ public class CozinhaController {
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<Cozinha> listar() {
-        return cozinhaRepository.listar();
+//        return cozinhaRepository.listar(); usando minha implementação
+        return cozinhaRepository.findAll(); /** usando Spring JPA*/
     }
 
-    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
-    public CozinhasXmlWrapper listarXml() {
-        return new CozinhasXmlWrapper(cozinhaRepository.listar());
-    }
+//    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
+//    public CozinhasXmlWrapper listarXml() {
+//        return new CozinhasXmlWrapper(cozinhaRepository.listar());
+//    }
 
 //    @ResponseStatus(value = HttpStatus.CREATED)
 //    @GetMapping(value = "/{cozinhaId}")  // /cozinhas/{cozinhaId}
@@ -47,9 +49,15 @@ public class CozinhaController {
 
     @GetMapping(value = "/{cozinhaId}")  // /cozinhas/{cozinhaId}
     public ResponseEntity<Cozinha> buscar(@PathVariable("cozinhaId") Long id) {
-        Cozinha cozinha =  cozinhaRepository.buscar(id);
-        if (cozinha!=null) {
-            return ResponseEntity.ok(cozinha);
+//        Cozinha cozinha =  cozinhaRepository.buscar(id);
+//        if (cozinha!=null) {
+//            return ResponseEntity.ok(cozinha);
+//        }
+
+        Optional<Cozinha> cozinha = cozinhaRepository.findById(id);
+
+        if(cozinha.isPresent()) {
+            return ResponseEntity.ok(cozinha.get());
         }
 //        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.notFound().build();
@@ -78,19 +86,20 @@ public class CozinhaController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Cozinha> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
-        Cozinha cozinhaAtual = cozinhaRepository.buscar(id);
+//        Cozinha cozinhaAtual = cozinhaRepository.buscar(id);
+        Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(id);
 //        cozinhaAtual.setNome(cozinha.getNome());
-        if(cozinhaAtual != null) {
-            BeanUtils.copyProperties(cozinha, cozinhaAtual, "id");
-            cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
-            return ResponseEntity.ok(cozinhaAtual);
+        if(cozinhaAtual.isPresent()) {
+            BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
+            Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual.get());
+            return ResponseEntity.ok(cozinhaSalva);
         }
 
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Cozinha> remover(@PathVariable Long id) {
+    public ResponseEntity<?> remover(@PathVariable Long id) {
 
         try {
             cadastroCozinha.excluir(id);
@@ -100,7 +109,7 @@ public class CozinhaController {
             return ResponseEntity.notFound().build();
         }
         catch (EntidadeEmUsoException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 

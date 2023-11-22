@@ -15,10 +15,10 @@ public class ConsultaCozinhaMain {
         ApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
                                                     .web(WebApplicationType.NONE)
                                                     .run(args);
-        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepositoryImp.class);
-        List<Cozinha> cozinhas = cozinhaRepository.listar();
-        for(Cozinha cozinha: cozinhas) {
-            System.out.println(cozinha.getNome());
-        }
+//        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepositoryImp.class);
+//        List<Cozinha> cozinhas = cozinhaRepository.listar();
+//        for(Cozinha cozinha: cozinhas) {
+//            System.out.println(cozinha.getNome());
+//        }
     }
 }

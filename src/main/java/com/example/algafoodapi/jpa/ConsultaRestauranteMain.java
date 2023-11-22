@@ -1,11 +1,8 @@
 package com.example.algafoodapi.jpa;
 
 import com.example.algafoodapi.AlgafoodApiApplication;
-import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.Restaurante;
-import com.example.algafoodapi.domain.repository.CozinhaRepository;
 import com.example.algafoodapi.domain.repository.RestauranteRepository;
-import com.example.algafoodapi.infrastructure.repository.CozinhaRepositoryImp;
 import com.example.algafoodapi.infrastructure.repository.RestauranteRepositoryImp;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
