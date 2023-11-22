@@ -5,6 +5,7 @@ import com.example.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.example.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
 import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.CozinhasXmlWrapper;
+import com.example.algafoodapi.domain.model.Estado;
 import com.example.algafoodapi.domain.repository.CozinhaRepository;
 import com.example.algafoodapi.domain.service.CadastroCozinhaService;
 import org.springframework.beans.BeanUtils;
@@ -77,7 +78,4 @@ public class CozinhaController {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
-
-
-
 }
