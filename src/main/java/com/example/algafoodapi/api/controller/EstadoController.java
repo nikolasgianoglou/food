@@ -3,7 +3,6 @@ package com.example.algafoodapi.api.controller;
 
 import com.example.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.example.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
-import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.Estado;
 import com.example.algafoodapi.domain.repository.EstadoRepository;
 import com.example.algafoodapi.domain.service.CadastroEstadoService;

@@ -32,51 +32,19 @@ public class CozinhaController {
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<Cozinha> listar() {
-//        return cozinhaRepository.listar(); usando minha implementação
         return cozinhaRepository.findAll(); /** usando Spring JPA*/
     }
 
-//    @GetMapping(value = "/xml", produces = MediaType.APPLICATION_XML_VALUE)
-//    public CozinhasXmlWrapper listarXml() {
-//        return new CozinhasXmlWrapper(cozinhaRepository.listar());
-//    }
-
-//    @ResponseStatus(value = HttpStatus.CREATED)
-//    @GetMapping(value = "/{cozinhaId}")  // /cozinhas/{cozinhaId}
-//    public Cozinha buscar(@PathVariable("cozinhaId") Long id) {
-//        return cozinhaRepository.buscar(id);
-//    }
-
     @GetMapping(value = "/{cozinhaId}")  // /cozinhas/{cozinhaId}
     public ResponseEntity<Cozinha> buscar(@PathVariable("cozinhaId") Long id) {
-//        Cozinha cozinha =  cozinhaRepository.buscar(id);
-//        if (cozinha!=null) {
-//            return ResponseEntity.ok(cozinha);
-//        }
 
         Optional<Cozinha> cozinha = cozinhaRepository.findById(id);
 
         if(cozinha.isPresent()) {
             return ResponseEntity.ok(cozinha.get());
         }
-//        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         return ResponseEntity.notFound().build();
     }
-
-
-//    @GetMapping(value = "/{id}")  // /cozinhas/{cozinhaId}
-//    public ResponseEntity<Cozinha> buscar(@PathVariable Long id) {
-//
-//        Cozinha cozinha =  cozinhaRepository.buscar(id);
-//        return ResponseEntity.status(HttpStatus.OK).build();
-//        return ResponseEntity.ok(cozinha);
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add(HttpHeaders.LOCATION, "http://algafood.local:8080/cozinhas");
-//        return ResponseEntity
-//                .status(HttpStatus.FOUND)
-//                .headers(headers)
-//                .build();
-//    }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -86,9 +54,7 @@ public class CozinhaController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Cozinha> atualizar(@PathVariable Long id, @RequestBody Cozinha cozinha) {
-//        Cozinha cozinhaAtual = cozinhaRepository.buscar(id);
         Optional<Cozinha> cozinhaAtual = cozinhaRepository.findById(id);
-//        cozinhaAtual.setNome(cozinha.getNome());
         if(cozinhaAtual.isPresent()) {
             BeanUtils.copyProperties(cozinha, cozinhaAtual.get(), "id");
             Cozinha cozinhaSalva = cadastroCozinha.salvar(cozinhaAtual.get());
@@ -104,7 +70,6 @@ public class CozinhaController {
         try {
             cadastroCozinha.excluir(id);
             return ResponseEntity.noContent().build();
-//            return ResponseEntity.notFound().build();
         }catch (EntidadeNaoEncontradaException e){
             return ResponseEntity.notFound().build();
         }
