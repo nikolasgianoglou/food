@@ -2,10 +2,9 @@ package com.example.algafoodapi.api.controller;
 
 import com.example.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.example.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
-import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.FormaPagamento;
 import com.example.algafoodapi.domain.repository.FormaPagamentoRepository;
-import com.example.algafoodapi.domain.service.FormaPagamentoService;
+import com.example.algafoodapi.domain.service.CadastroFormaPagamentoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +22,7 @@ public class FormaPagamentoController {
     private FormaPagamentoRepository formaPagamentoRepository;
 
     @Autowired
-    private FormaPagamentoService cadastroFormaPagamento;
+    private CadastroFormaPagamentoService cadastroFormaPagamento;
 
     @GetMapping
     public List<FormaPagamento> listar() {

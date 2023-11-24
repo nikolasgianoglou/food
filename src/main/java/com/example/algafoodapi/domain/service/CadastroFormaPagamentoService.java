@@ -2,7 +2,6 @@ package com.example.algafoodapi.domain.service;
 
 import com.example.algafoodapi.domain.exception.EntidadeEmUsoException;
 import com.example.algafoodapi.domain.exception.EntidadeNaoEncontradaException;
-import com.example.algafoodapi.domain.model.Cozinha;
 import com.example.algafoodapi.domain.model.FormaPagamento;
 import com.example.algafoodapi.domain.repository.FormaPagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FormaPagamentoService {
+public class CadastroFormaPagamentoService {
 
     @Autowired
     private FormaPagamentoRepository formaPagamentoRepository;
