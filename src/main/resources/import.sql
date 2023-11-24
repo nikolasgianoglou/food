@@ -10,3 +10,6 @@ insert into estado (id, nome) values (2, 'São Paulo')
 insert into estado (id, nome) values (3, 'Goiás')
 insert into estado (id, nome) values (4, 'Pernambuco')
 insert into estado (id, nome) values (5, 'Pará')
+
+insert into forma_pagamento (descricao) values ('DEBITO');
+insert into forma_pagamento (descricao) values ('CREDITO');
