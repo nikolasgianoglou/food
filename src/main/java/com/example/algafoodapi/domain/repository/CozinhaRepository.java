@@ -5,13 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository /** Anotando esse classe com @Repository e herdando essa classe JpaRepository<T, ID> o Spring JPA me fornece a implementação dos métodos*/
 public interface CozinhaRepository extends JpaRepository<Cozinha, Long> {
 
-//    List<Cozinha> listar();
-//    List<Cozinha> buscarPorNome(String nome);
-//    Cozinha buscar(Long id);
-//    Cozinha salvar(Cozinha cozinha);
-//    void remover(Long id);
+    List<Cozinha> findByNome(String nome); //Colocando o nome de uma propriedade o Spring cria o metodo para consultar por nome
+    Optional<Cozinha> findEspecificByNome(String nome);
 }

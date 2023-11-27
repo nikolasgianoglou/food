@@ -28,7 +28,7 @@ public class CozinhaRepositoryImp /**implements CozinhaRepository*/ {
     }
 
 //    @Override
-    public List<Cozinha> buscarPorNome(String nome) {
+    public List<Cozinha> consultaPorNome(String nome) {
 //        return manager.createQuery("from Cozinha where nome=:nome", Cozinha.class)
         return manager.createQuery("from Cozinha where nome like :nome", Cozinha.class)
                 .setParameter("nome","%"+nome+"%")
